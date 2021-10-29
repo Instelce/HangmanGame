@@ -1,6 +1,6 @@
 # HangmanGame
 
-Petit jeu du pendu.
+Petit jeu du pendu en console et peut-être bientôt avec une interface.
 
 ## Utilisation
 
@@ -17,5 +17,5 @@ Run the game ⤵
 ## Fonctionalité
 
 ❌ Dictionaire anglais et français inclus<br>
-❌ Contre l'ordinateur et joueur contre joueur<br>
-❌ Stockage des parties
+✔ Contre l'ordinateur et joueur contre joueur<br>
+✔ Stockage des parties
