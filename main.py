@@ -2,6 +2,7 @@ from random import choice
 import json
 
 from draw import hangman_animation
+from get_word import get_random_word, get_random_word_def
 
 
 class Game():
@@ -99,7 +100,7 @@ class Game():
                     self.good_letter += 1
 
             # Check if the player letter is noy in the choice word
-            if not player_letter in self.word_choice and not player_letter in self.accents:
+            if not player_letter in self.word_choice and not player_letter in self.accents or player_letter in self.accents:
                 self.hangman_frames += 1
                 self.life -= 1
                 self.wrong_letter.append(player_letter)
@@ -110,14 +111,18 @@ class Game():
             if self.good_letter == len(self.word_choice):
                 self.is_win = True
                 print(
-                    f"Victory, you have found the word {''.join(self.word_choice)}.")
+                    f"Victory, you have found the word {''.join(self.word_choice)}.\n")
+                print(
+                    f"Definition de {''.join(self.word_choice)}:\n{get_random_word_def(''.join(self.word_choice))}")
                 separator()
                 break
 
             # Check death
             if self.life <= 0:
                 print(
-                    f"Oh no, you lost, the word was {''.join(self.word_choice)}.")
+                    f"Oh no, you lost, the word was {''.join(self.word_choice)}.\n")
+                print(
+                    f"Definition de {''.join(self.word_choice)}:\n{get_random_word_def(''.join(self.word_choice))}")
                 separator()
                 break
 
@@ -167,8 +172,6 @@ def clear_stats():
     separator()
 
 
-word_list = ['mot', 'sucre', 'farine', 'pomme', 'poulet']
-
 # Game loop
 while True:
     # Reset life
@@ -187,7 +190,8 @@ while True:
     if menu_choice == '1':
         game_mode = 'Player versus computer'
 
-        random_word = choice(word_list)
+        # random_word = choice(word_list)
+        random_word = get_random_word()
         random_word_split = []
         for letter in random_word:
             random_word_split.append(letter)
