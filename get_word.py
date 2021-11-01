@@ -3,7 +3,7 @@ import requests
 
 # Api to https://www.dicolink.com/
 target_url = "https://api.dicolink.com"
-token = "_0QSsKMBBuylQL-wFwdxNsuk5ozVU7tm"
+token = None
 
 
 # Get random word
