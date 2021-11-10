@@ -7,6 +7,15 @@ from get_word import get_random_word, get_random_word_def
 
 class Game():
     def __init__(self, menu_choice, game_mode, word_choice, life):
+        """
+            Constructor
+
+            args:
+                menu_choice (str): choice of user in the menu
+                game_mode (str): Get the game mode
+                word_choice (str)
+                life (int)        
+        """
         self.menu_choice = menu_choice
         self.game_mode = game_mode
         self.word_choice = word_choice
@@ -20,11 +29,11 @@ class Game():
         self.game_index = 0
 
         self.accents = {
-            'a': ['à', 'â', 'ä'],
-            'e': ['é', 'è', 'ê', 'ë'],
-            'i': ['ì', 'î', 'ï'],
-            'o': ['ò', 'ô', 'ö'],
-            'u': ['ù', 'û', 'ü'],
+            'a': ['a', 'à', 'â', 'ä'],
+            'e': ['e', 'é', 'è', 'ê', 'ë'],
+            'i': ['i', 'ì', 'î', 'ï'],
+            'o': ['o', 'ò', 'ô', 'ö'],
+            'u': ['u', 'ù', 'û', 'ü'],
         }
 
     def create_player_word(self):
@@ -100,7 +109,7 @@ class Game():
                     self.good_letter += 1
 
             # Check if the player letter is noy in the choice word
-            if not player_letter in self.word_choice and not player_letter in self.accents or player_letter in self.accents:
+            if not player_letter in self.word_choice:
                 self.hangman_frames += 1
                 self.life -= 1
                 self.wrong_letter.append(player_letter)
@@ -112,8 +121,9 @@ class Game():
                 self.is_win = True
                 print(
                     f"Victory, you have found the word {''.join(self.word_choice)}.\n")
-                print(
-                    f"Definition de {''.join(self.word_choice)}:\n{get_random_word_def(''.join(self.word_choice))}")
+                if self.menu_choice == '1':
+                    print(
+                        f"Definition de {''.join(self.word_choice)}:\n{get_random_word_def(''.join(self.word_choice))}")
                 separator()
                 break
 
@@ -121,8 +131,9 @@ class Game():
             if self.life <= 0:
                 print(
                     f"Oh no, you lost, the word was {''.join(self.word_choice)}.\n")
-                print(
-                    f"Definition de {''.join(self.word_choice)}:\n{get_random_word_def(''.join(self.word_choice))}")
+                if self.menu_choice == '1':
+                    print(
+                        f"Definition de {''.join(self.word_choice)}:\n{get_random_word_def(''.join(self.word_choice))}")
                 separator()
                 break
 
@@ -132,6 +143,13 @@ class Game():
 
 def base(menu_choice='', info=''):
     return f'{info} [{menu_choice}]>> '
+
+
+def split_word(word):
+    word_split = []
+    for letter in word:
+        word_split.append(letter)
+    return word_split
 
 
 def separator(character="=", lenght=50):
@@ -181,6 +199,7 @@ while True:
     print("Welcome to hangman game\n"
           "[1] Versus the computer\n"
           "[2] Player versus player\n"
+          "[3] Cheat computer\n"
           "[S] Your stat\n"
           "[C] Clear stat\n"
           "[E] Exit the game")
@@ -191,26 +210,29 @@ while True:
         game_mode = 'Player versus computer'
 
         # random_word = choice(word_list)
-        random_word = get_random_word()
-        random_word_split = []
-        for letter in random_word:
-            random_word_split.append(letter)
+        random_word = split_word(get_random_word())
 
         player_vs_computer = Game(
-            menu_choice, game_mode, random_word_split, life)
+            menu_choice, game_mode, random_word, life)
         player_vs_computer.run()
     # Player versus player
     elif menu_choice == '2':
         game_mode = 'Player versus player'
 
-        player_choice_word = input(
-            base(menu_choice, "\nChoose a word for your friend"))
-        player_choice_word_split = []
-        for letter in player_choice_word:
-            player_choice_word_split.append(letter)
+        player_choice_word = split_word(input(
+            base(menu_choice, "\nChoose a word for your friend")))
 
         player_vs_player = Game(
-            menu_choice, game_mode, player_choice_word_split, life)
+            menu_choice, game_mode, player_choice_word, life)
+        player_vs_player.run()
+    # Player versus cheat computer
+    elif menu_choice == '3':
+        game_mode = 'Player versus cheat computer'
+
+        random_word = split_word(get_random_word())
+
+        player_vs_player = Game(
+            menu_choice, game_mode, random_word, life)
         player_vs_player.run()
     # Display stats
     elif menu_choice == 'S':

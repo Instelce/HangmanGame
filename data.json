@@ -1,1 +1,1 @@
-{}
+{"game_0": [{"game_mode": "Player versus computer", "index": 0, "word_choice": ["m", "i", "l", "l", "e", "s", "i", "m", "a", "i"], "wrong_letter": ["b", "c", "u", "o", "p", "d", "z", "t", "n"], "remaining_life": 1, "is_win": true}], "game_1": [{"game_mode": "Player versus player", "index": 1, "word_choice": ["a", "\u00e2", "e", "t", "h", "u", "\u00ee"], "wrong_letter": ["o", "o", "i"], "remaining_life": 7, "is_win": true}]}
