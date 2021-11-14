@@ -9,6 +9,8 @@ Get the game ⤵
 	git clone https://github.com/Instelce/HangmanGame
 	cd HangmanGame
 
+	pip install -r requirements.txt
+
 Run the game ⤵
 
 	python main.py
@@ -16,6 +18,6 @@ Run the game ⤵
 
 ## Fonctionalité
 
-❌ Dictionaire anglais et français inclus<br>
+✔ Dictionaire français inclus<br>
 ✔ Contre l'ordinateur et joueur contre joueur<br>
 ✔ Stockage des parties
